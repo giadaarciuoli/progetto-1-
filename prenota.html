@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prenota il Tuo Viaggio - EuropaGo</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">EuropaGo</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="destinazioni.html">Destinazioni</a></li>
+                    <li><a href="prenota.html" class="active">Prenota</a></li>
+                    <li><a href="contatti.html">Contatti</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container page-padding">
+        <section class="booking-form-section">
+            <h2>Prenota la Tua Avventura Europea</h2>
+            <p>Compila il modulo sottostante per richiedere la tua prenotazione. Ti contatteremo al più presto per la conferma.</p>
+            
+            <form id="bookingForm" class="booking-form">
+                <div class="form-group">
+                    <label for="name">Nome Completo:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefono (opzionale):</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="destination">Destinazione Desiderata:</label>
+                    <select id="destination" name="destination" required>
+                        <option value="">Seleziona una destinazione</option>
+                        <option value="Parigi">Parigi, Francia</option>
+                        <option value="Roma">Roma, Italia</option>
+                        <option value="Berlino">Berlino, Germania</option>
+                        <option value="Amsterdam">Amsterdam, Paesi Bassi</option>
+                        <option value="Altra">Altra (specificare nelle note)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="travel-dates">Date di Viaggio Preferite:</label>
+                    <input type="text" id="travel-dates" name="travel-dates" placeholder="Es. Inizio Luglio / 10-15 Agosto">
+                </div>
+
+                <div class="form-group">
+                    <label for="participants">Numero Partecipanti:</label>
+                    <input type="number" id="participants" name="participants" min="1" value="1" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" id="under26" name="under26">
+                    <label for="under26" class="checkbox-label">Richiedo lo sconto Under 26 (se applicabile a tutti i partecipanti o al richiedente)</label>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Note Aggiuntive:</label>
+                    <textarea id="notes" name="notes" rows="4" placeholder="Esigenze particolari, altre destinazioni, ecc."></textarea>
+                </div>
+
+                <button type="submit" class="btn">Invia Richiesta</button>
+            </form>
+            <p id="form-message" class="form-message"></p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 EuropaGo - Tutti i diritti riservati.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Semplice script per gestire il parametro URL per la destinazione
+        // e per un messaggio di "invio" fittizio
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const destinationParam = urlParams.get('destinazione');
+            if (destinationParam) {
+                const destinationSelect = document.getElementById('destination');
+                if (destinationSelect) {
+                    destinationSelect.value = destinationParam;
+                }
+            }
+
+            const bookingForm = document.getElementById('bookingForm');
+            const formMessage = document.getElementById('form-message');
+            if(bookingForm) {
+                bookingForm.addEventListener('submit', function(e) {
+                    e.preventDefault(); // Previene l'invio reale del form
+                    formMessage.textContent = 'Grazie per la tua richiesta! Ti contatteremo presto.';
+                    formMessage.style.color = 'green';
+                    bookingForm.reset(); // Resetta il form
+                });
+            }
+        });
+    </script>
+</body>
+</html>
